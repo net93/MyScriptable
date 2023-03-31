@@ -1,0 +1,144 @@
+dns:
+  default-nameserver:
+  - 1.1.1.1
+  nameserver:
+  - quic://6891bf.dns.nextdns.io
+  - doh://dns.nextdns.io/6891bf
+  skip-cert-verify: false
+log-level: error
+mode: rule
+proxies:
+- name: vn01
+  password: 5623be5f-c9da-4511-81a9-b4b39b16edae
+  port: 443
+  server: 103.173.255.127
+  skip-cert-verify: true
+  type: trojan
+  udp: true
+- name: us
+  password: 888da6d0-8438-11ed-ad05-1239d0255272
+  port: 443
+  server: us-trojan.bonds.id
+  skip-cert-verify: true
+  type: trojan
+- ip: 10.7.0.10/24
+  name: sidestore
+  password:
+  port: 51820
+  private-key: AIIeeUDvk3NeAFJ9BWCQvPJize/9WZibMnGJ/0rt5k4=
+  public-key: kHDoekeYhBvfW9a9UQ+UCmpbG423eejTjcjW+DT+JF0=
+  server: 127.0.0.1
+  type: wireguard
+- name: sg3
+  password: f875f2b0-9c02-11ed-a6b9-1239d0255272
+  port: 443
+  server: sg3-trojan.bonds.id
+  skip-cert-verify: true
+  type: trojan
+- name: sg6
+  password: 39a03f30-9c02-11ed-be4b-1239d0255272
+  port: 443
+  server: sg6-trojan.bonds.id
+  type: trojan
+proxy-groups:
+- icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Final.png
+  include-all: true
+  name: Final
+  proxies: []
+  type: select
+- icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Proxy.png
+  name: Proxy
+  proxies:
+  - US
+  - JP
+  - SG
+  - TW
+  - HK
+  type: select
+  url: http://cp.cloudflare.com/generate_204
+- icon: https://raw.githubusercontent.com/shindgewongxj/WHATSINStash/main/icon/wireguard.png
+  name: SideStore
+  proxies:
+  - sidestore
+  type: select
+- filter: "港|\U0001F1ED\U0001F1F0|HK|hk|(?i)Hong"
+  icon: https://raw.githubusercontent.com/Semporia/Hand-Painted-icon/master/Rounded_Rectangle/Hong_Kong.png
+  include-all: true
+  interval: 120
+  lazy: true
+  name: HK
+  proxies: []
+  tolerance: 50
+  type: url-test
+  url: http://cp.cloudflare.com/generate_204
+- filter: "台|\U0001F1E8\U0001F1F3|\U0001F1F9\U0001F1FC|湾|TW|tw|(?i)Taiwan"
+  icon: https://raw.githubusercontent.com/Semporia/Hand-Painted-icon/master/Rounded_Rectangle/Taiwan.png
+  include-all: true
+  interval: 120
+  lazy: true
+  name: TW
+  proxies: []
+  tolerance: 50
+  type: url-test
+  url: http://cp.cloudflare.com/generate_204
+- filter: "新加坡|坡|狮城|\U0001F1F8\U0001F1EC|SG|sg|(?i)Singapore"
+  icon: https://raw.githubusercontent.com/Semporia/Hand-Painted-icon/master/Rounded_Rectangle/Singapore.png
+  include-all: true
+  interval: 120
+  lazy: true
+  name: SG
+  proxies: []
+  tolerance: 50
+  type: url-test
+  url: http://cp.cloudflare.com/generate_204
+- filter: "日|\U0001F1EF\U0001F1F5|东京|JP|jp|(?i)Japan"
+  icon: https://raw.githubusercontent.com/Semporia/Hand-Painted-icon/master/Rounded_Rectangle/Japan.png
+  include-all: true
+  interval: 120
+  lazy: true
+  name: JP
+  proxies: []
+  tolerance: 50
+  type: url-test
+  url: http://cp.cloudflare.com/generate_204
+- filter: "美|\U0001F1FA\U0001F1F2|US|us|(?i)States|American"
+  icon: https://raw.githubusercontent.com/Semporia/Hand-Painted-icon/master/Rounded_Rectangle/United_States.png
+  include-all: true
+  interval: 120
+  lazy: true
+  name: US
+  proxies: []
+  tolerance: 50
+  type: url-test
+  url: http://cp.cloudflare.com/generate_204
+- icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
+  include-all: true
+  name: Fallback
+  proxies: []
+  type: fallback
+  url: http://cp.cloudflare.com/generate_204
+- icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png
+  include-all: true
+  name: Relay
+  proxies: []
+  type: relay
+- icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Round_Robin.png
+  include-all: true
+  name: Blance
+  proxies: []
+  strategy: consistent-hashing
+  type: load-balance
+- icon: https://raw.githubusercontent.com/Semporia/Hand-Painted-icon/master/Universal/RoundRobin.png
+  name: ShareHotspot
+  proxies:
+  - DIRECT
+  - sg6
+  - sg3
+  - vn01
+  type: select
+rule-providers: {}
+rules:
+- IP-CIDR,172.20.10.0/28,ShareHotspot
+- DOMAIN-KEYWORD,igg.com,SG
+- DOMAIN-KEYWORD,9458.com,SG
+- DOMAIN-SUFFIX,youtubei.googleapis.com,Final
