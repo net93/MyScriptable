@@ -7,8 +7,8 @@ w.addImage(img)
 w.presentLarge()
 Script.complete()
 async function loadImage(imageName){
-  let icld = FileManager.iCloud()
+  let icloud = FileManager.iCloud()
   let p = `/private/var/mobile/Library/Mobile Documents/iCloud~dk~simonbs~Scriptable/Documents/Lunar/${imageName}.png`
-  let image = icld.readImage(p)
+  let image = icloud.readImage(p)
   return image
 }
