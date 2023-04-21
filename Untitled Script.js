@@ -146,6 +146,4 @@ let Base64 = {
     }
 }
 
-if(type.match(/decode/i)){return console.log("1")}else {return console.log("0")}
-
 }

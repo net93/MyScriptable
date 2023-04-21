@@ -10,7 +10,6 @@ eyJlcnJvciI6MCwiZGF0YSI6eyIxMzU3ODYwNzg1OTQ1NTM5MjgwIjp7ImFkcyI6W10sImJhY2t1cCI6
 **/
 
 var Base64 = {
-
     // private property
     _keyStr : "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
 
@@ -143,7 +142,7 @@ myA.addCancelAction("Decode")
 let action = await myA.presentAlert()
 let txt = myA.textFieldValue(0)
 if(action == 0){
-    let encode = Base64.encode(txt)
+    let encode =  Base64.encode(txt)
     await view(encode)
 }else {
     let decode = Base64.decode(txt)
