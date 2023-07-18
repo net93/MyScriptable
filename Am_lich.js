@@ -1,7 +1,7 @@
 // Variables used by Scriptable.
 // These must be at the very top of the file. Do not edit.
 // icon-color: cyan; icon-glyph: yin-yang;
-//qqqq
+
 // importModule
 let module = importModule('Lunar/Lunar');
 // input date
