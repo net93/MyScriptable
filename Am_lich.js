@@ -4,7 +4,22 @@
 
 // importModule
 let module = importModule('Lunar/Lunar');
-let date = new Date();
+// input date
+let date
+if(config.runsInWidget){
+   date = new Date()
+}else{   
+  let alert = new Alert()  
+  alert.title = 'Enter the date in the box'
+  alert.message = 'Format YYYY-MM-DD'
+  alert.addAction('OK')
+  alert.addCancelAction('Cancel')
+  alert.addTextField('YYYY-MM-DD')
+  await alert.presentAlert()
+  let i1 = alert.textFieldValue(0)
+  if(i1==''){date = new Date()}else{date = new Date(`${i1}`)}
+}
+
 let d = date.getDate();
 let m = date.getMonth() + 1;
 let y = date.getFullYear();
@@ -110,9 +125,10 @@ rightChild4.addImage(img4);
 let rightChild5 = rightStack.addStack();
 rightChild5.size = new Size(60*a/100, 40)
 
-
-wLunar.presentLarge()
+if(config.runsInWidget){
 Script.setWidget(wLunar)
+}else{wLunar.presentLarge()}
+
 Script.complete();
 
 async function loadImage(imageName){
