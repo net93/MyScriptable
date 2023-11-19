@@ -3,27 +3,43 @@
 // icon-color: cyan; icon-glyph: yin-yang;
 
 // importModule
-let module = importModule('Lunar/Lunar');
+let module = importModule('Lunar/Lunar.min');
 // input date
 let date
 if(config.runsInWidget){
    date = new Date()
 }else{   
-  let alert = new Alert()  
-  alert.title = 'Enter the date in the box'
-  alert.message = 'Format YYYY-MM-DD'
-  alert.addAction('OK')
-  alert.addCancelAction('Cancel')
-  alert.addTextField('YYYY-MM-DD')
-  await alert.presentAlert()
-  let i1 = alert.textFieldValue(0)
-  if(i1==''){date = new Date()}else{date = new Date(`${i1}`)}
+let solar = importModule("Lunar/Lunar.min")
+
+let a = new Alert()
+a.title = "Âm lịch <=> Dương lịch"
+a.addAction("Dương=>Âm")
+a.addCancelAction("Âm=>Dương")
+let c = await a.present()
+if( c == -1){
+	let a1 = new Alert()
+	a1.title = "Nhập ngày tháng năm Âm lịch"
+	a1.addTextField("YYYY-MM-DD")
+	a1.addAction("Không")
+	a1.addCancelAction("Nhuận")
+	let kq1 = await a1.present()
+	let lunarLeap = kq1 == -1 ? 1:0
+	let arrSolar = solar.lunar2Solar(new Date(a1.textFieldValue(0)), lunarLeap)
+	date = new Date(arrSolar)	
+}else{
+	let a1 = new Alert()
+	a1.title = "Nhập ngày tháng năm Dương lịch"
+	a1.addTextField("YYYY-MM-DD")
+	a1.addAction("OK")
+	let kq1 = await a1.present()
+	date = a1.textFieldValue(0) =='' ? new Date() : new Date(a1.textFieldValue(0))
+}
 }
 
 let d = date.getDate();
 let m = date.getMonth() + 1;
 let y = date.getFullYear();
-let lunar = module.lunar(date);
+let lunar = module.solar2Lunar(date);
 let day = module.dayOfWeek(date);
 let canchi = module.canchi(date);
 let mLunar = ['Giêng', 'Hai', 'Ba', 'Tư', 'Năm', 'Sáu', 'Bảy', 'Tám', 'Chín', 'Mười', 'Một', 'Chạp'];
