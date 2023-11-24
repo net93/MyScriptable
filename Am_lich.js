@@ -55,44 +55,51 @@ let wLunar = new ListWidget();
 
 // add main stack
 let mainStack = wLunar.addStack();
+mainStack.size = new Size(a, b-30)
+
+let botS = wLunar.addStack();
+botS.size = new Size(a, 30)
+botS.backgroundColor = Color.black()	
+let botTxt = botS.addText('Giờ Hoàng đạo: ' + canchi[5])
+botTxt.font = new Font('cochin-Regular', 15)
+botTxt.textColor = Color.white()
 
 let leftStack = mainStack.addStack();
 leftStack.layoutVertically();
 leftStack.size = new Size(40*a/100, b);
-// leftStack.borderWidth = 1;
-// leftStack.cornerRadius = 20;
-leftStack.backgroundColor = new Color('006789', 0.2)
+leftStack.backgroundColor = Color.black()
 let rightStack = mainStack.addStack();
 rightStack.layoutVertically();
 rightStack.size = new Size(60*a/100, b);
-rightStack.backgroundColor = new Color('006789', 0.21)
-// rightStack.borderWidth = 1;
-// rightStack.cornerRadius = 20;
+rightStack.backgroundColor = Color.black()
 
 // add left child stack
 let leftChild1 = leftStack.addStack();
 leftChild1.size = new Size(40*a/100, 40*a/100)
 let txtLeft1 = leftChild1.addText(lunar.substr(8,2))
 txtLeft1.font = new Font('cochin-Regular', 33*a/100)
+txtLeft1.textColor = Color.white()
 
 let leftChild2 = leftStack.addStack();
 leftChild2.size = new Size(40*a/100, 20)
 let txtLeft2 = leftChild2.addText('Tháng '+mLunar[parseInt(lunar.substr(5,2))-1]+' ('+ lunar.substr(5,2)+ ')');
+txtLeft2.textColor = Color.white()
 
 let leftChild3 = leftStack.addStack();
 leftChild3.size = new Size(40*a/100, 25)
 let txtLeft3 = leftChild3.addText(canchi[1]);
-
+txtLeft3.textColor = Color.white()
 
 let leftChild4 = leftStack.addStack();
 leftChild4.size = new Size(40*a/100, 25)
 let txtLeft4 = leftChild4.addText(canchi[2]);
+txtLeft4.textColor = Color.white()
 
 let leftChild5 = leftStack.addStack();
 leftChild5.size = new Size(40*a/100, 25)
 let dD = canchi[3];
 let txtLeft5 = leftChild5.addText(dD)
-
+txtLeft5.textColor = Color.white()
 
 let leftChild6 = leftStack.addStack();
 leftChild6.layoutVertically();
@@ -101,7 +108,9 @@ leftChild61.size = new Size(40*a/100, 20);
 let leftChild62 = leftChild6.addStack();
 leftChild62.size = new Size(40*a/100, 30)
 let txtLeft61 = leftChild61.addText(canchi[0]);
+txtLeft61.textColor = Color.white()
 let txtLeft62 = leftChild62.addText('('+lunar.substr(0,4)+')');
+txtLeft62.textColor = Color.white()
 
 let leftChild7 = leftStack.addStack();
 leftChild7.size = new Size(40*a/100, 30);
@@ -110,8 +119,7 @@ leftChild7.size = new Size(40*a/100, 30);
 
 // right child stack
 let rightChild1 = rightStack.addStack();
-rightChild1.size = new Size(60*a/100, 100);
-rightChild1.setPadding(0, 80, 0, 0)
+rightChild1.size = new Size(60*a/100, 90);
 let x = parseInt(lunar.substr(8, 2));
 let rChild1 = rightChild1.addStack();
 x = x==30 ? 0 : x
@@ -122,22 +130,24 @@ rChild1.addImage(img2)
 rightChild1.backgroundImage = imgStar;
 rightChild1.backgroundColor = Color.black();
 rightChild1.cornerRadius = 10;
-rChild1.setPadding(10, 0, 0, 20)
+rChild1.setPadding(15, 0, 0, 15)
 
 
 let rightChild2 = rightStack.addStack();
 rightChild2.size = new Size(60*a/100, 57)
 let txtRight2 = rightChild2.addText(day)
 txtRight2.font = new Font('ChalkboardSE-Regular',40);
-
+txtRight2.textColor = Color.white()
 let rightChild3 = rightStack.addStack();
 rightChild3.size = new Size(60*a/100, 50)
 let txtRight3 = rightChild3.addText(date.getDate()+'/' +(date.getMonth()+1)+'/' +date.getFullYear());
 txtRight3.font = new Font('ChalkboardSE',40);
+txtRight3.textColor = Color.white()
 let rightChild4 = rightStack.addStack();
-rightChild4.size = new Size(60*a/100, 80)
+rightChild4.size = new Size(60*a/100, 110)
 let img4 = await loadImage(canchi[4]);
 rightChild4.addImage(img4);
+
 let rightChild5 = rightStack.addStack();
 rightChild5.size = new Size(60*a/100, 40)
 
