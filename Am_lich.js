@@ -60,6 +60,7 @@ mainStack.size = new Size(a, b-30)
 let botS = wLunar.addStack();
 botS.size = new Size(a, 30)
 botS.backgroundColor = Color.black()	
+botS.setPadding(0, 0, 3, 0)
 let botTxt = botS.addText('Giờ Hoàng đạo: ' + canchi[5])
 botTxt.font = new Font('cochin-Regular', 15)
 botTxt.textColor = Color.white()
@@ -141,7 +142,7 @@ txtRight2.textColor = Color.white()
 let rightChild3 = rightStack.addStack();
 rightChild3.size = new Size(60*a/100, 50)
 let txtRight3 = rightChild3.addText(date.getDate()+'/' +(date.getMonth()+1)+'/' +date.getFullYear());
-txtRight3.font = new Font('ChalkboardSE',40);
+txtRight3.font = new Font('ChalkboardSE',35);
 txtRight3.textColor = Color.white()
 let rightChild4 = rightStack.addStack();
 rightChild4.size = new Size(60*a/100, 110)
